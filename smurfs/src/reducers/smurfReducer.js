@@ -2,7 +2,7 @@ import {
     FETCH_EXHIBIT_START, 
     FETCH_EXHIBIT_SUCCESS, 
     FETCH_EXHIBIT_FAIL 
-} from '../actions/exhibitActions';
+} from '../actions/smurfActions';
 
 const initialState = {
     "data": "",
