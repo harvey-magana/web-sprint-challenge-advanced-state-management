@@ -1,19 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
+import { fetchData } from '../actions/smurfActions';
 import { connect } from 'react-redux';
 import "./App.css";
 
-// V. Connect 
-// 1. create a child component 
-// 2. import { connect } from 'react-redux'
-// 3. At the bottom of the child component, add the following: 
-// export default connect(() => {}, {})(ChildComponent)
-// 4. Create mapStateToProps
-// 5. Pass mapStateToProps into connect: 
-// export default connect (mapStateToProps, {})(Component)
+function App(props) {
+  useEffect(() => {
+    props.fetchData();
+  }, [])
 
-
-class App extends Component {
-  render() {
     return (
       <div className="App">
         <h1>SMURFS! W/Redux</h1>
@@ -22,10 +16,10 @@ class App extends Component {
         <div>Have fun!</div>
       </div>
     );
-  }
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     //exhibitsAsProps: state.data,
     //isFetching: state.isFetching,
@@ -33,4 +27,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect (mapStateToProps, {})(App)
+export default connect (mapStateToProps, {fetchData})(App)

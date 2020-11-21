@@ -14,6 +14,7 @@ export const fetchData = () => dispatch => {
         .get('http://localhost:3333/smurfs')
         .then(res => {
             const data = res.data.objects
+            console.log(res)
           dispatch({ type: FETCH_EXHIBIT_SUCCESS, payload: data })
         })
         .catch( err => dispatch({ type: FETCH_EXHIBIT_FAIL, payload: err }))
