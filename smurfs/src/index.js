@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from 'redux'
+import { createStore } from 'redux';
+import { reducers } from './reducers';
 import "./index.css";
 import App from "./components/App";
 
@@ -38,5 +39,7 @@ import App from "./components/App";
 // 4. Create mapStateToProps
 // 5. Pass mapStateToProps into connect: 
 // export default connect (mapStateToProps, {})(Component)
+
+const store = createStore(reducers)
 
 ReactDOM.render(<App />, document.getElementById("root"));
