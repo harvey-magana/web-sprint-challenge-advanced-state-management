@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createStore } from 'redux';
-import { reducers } from './reducers';
+import { smurfReducer } from './reducers/smurfReducer';
+import { Provider } from 'react-redux';
 import "./index.css";
 import App from "./components/App";
 
@@ -40,6 +41,10 @@ import App from "./components/App";
 // 5. Pass mapStateToProps into connect: 
 // export default connect (mapStateToProps, {})(Component)
 
-const store = createStore(reducers)
+const store = createStore(smurfReducer)
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>, 
+document.getElementById("root"));
