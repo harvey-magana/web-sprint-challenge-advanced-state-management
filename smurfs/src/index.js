@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { applyMiddleware, createStore } from 'redux';
 import { smurfReducer } from './reducers/smurfReducer';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import "./index.css";
 import App from "./components/App";
 
@@ -41,7 +42,10 @@ import App from "./components/App";
 // 5. Pass mapStateToProps into connect: 
 // export default connect (mapStateToProps, {})(Component)
 
-const store = createStore(smurfReducer)
+const store = createStore(
+    smurfReducer,
+    applyMiddleware(thunk)
+)
 
 ReactDOM.render(
     <Provider store={store}>
