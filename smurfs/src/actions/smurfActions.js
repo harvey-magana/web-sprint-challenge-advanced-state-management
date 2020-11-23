@@ -27,21 +27,13 @@ export const fetchData = () => dispatch => {
 
 export const addSmurf = (newSmurf) => (dispatch) => {
     
-    return {
-        type: ADD_NEW_SMURF,
-        payload: newSmurf
-    }
-    /*
-    dispatch({ type: FETCH_SMURF_START });
-    setTimeout(() => {
-        axios
-        .post('http://localhost:3333/smurfs')
-        .then(res => {
-            const data = res.data
-            //console.log(data)
-          dispatch({ type: FETCH_SMURF_SUCCESS, payload: data })
-        })
-        .catch( err => dispatch({ type: FETCH_SMURF_FAIL, payload: err }))
-    }, 3000);
-    */
+    axios
+    .post('http://localhost:3333/smurfs', newSmurf)
+    .then(res => {
+        const data = res.data
+        //console.log(data)
+        console.log(newSmurf)
+      dispatch({ type: ADD_NEW_SMURF, payload: data })
+    })
+    .catch( err => dispatch({ type: FETCH_SMURF_FAIL, payload: err }))
 }

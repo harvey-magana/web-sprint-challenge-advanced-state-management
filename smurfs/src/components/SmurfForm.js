@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
 import { addSmurf } from '../actions/smurfActions';
-//import useForm from "../hooks/useForm";
 
-const initialValues = {
-  name: "",
-  age: "",
-  height: "",
-};
 
 // This form should be handled by a "useForm" custom hook
 // Build out the logic needed for a form custom hook (see the useForm.js file)
@@ -15,16 +9,16 @@ const initialValues = {
 
 const SmurfForm = (props) => {
 
-  const [values, setValues, reset] = useState(initialValues);
+  const [values, setValues] = useState([]);
 
-const handleChanges = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-};
+    const handleChanges = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value });
+    };
 
 const handleSubmit = (e) => {
     e.preventDefault();
     console.log("I was clicked...")
-    //setShowSuccessMessage(!showSuccessMessage)
+    props.addSmurf(values);
 };
 
   return (
@@ -61,6 +55,12 @@ const handleSubmit = (e) => {
     </>
   );
 };
+
+const mapStateToProps = (state) => {
+    return {
+      smurfs: state.data,
+    }
+  }
 
 export default connect(
     () => {
