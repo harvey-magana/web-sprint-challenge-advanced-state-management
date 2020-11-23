@@ -52,7 +52,7 @@ export const smurfReducer = (state = initialState, action) => {
                         name: action.payload, 
                         age: action.payload,
                         height: action.payload,
-                        id: action.payload
+                        id: action
                     }
                 ]
             }

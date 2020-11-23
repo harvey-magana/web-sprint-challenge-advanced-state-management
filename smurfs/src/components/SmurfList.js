@@ -1,7 +1,6 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { fetchData } from '../actions/smurfActions';
 import { connect } from 'react-redux';
-import SmurfForm from '../components/SmurfForm';
 import "./App.css";
 
 //1
@@ -12,7 +11,7 @@ import "./App.css";
 //import form method from actions 
 //add method to connect in HOC
 
-function App(props) {
+function SmurfList(props) {
   useEffect(() => {
     props.fetchData();
   }, [])
@@ -31,7 +30,6 @@ function App(props) {
             </div>
           )
         )}
-        <SmurfForm />
       </div>
     );
 }
@@ -44,4 +42,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect (mapStateToProps, {fetchData})(App)
+export default connect (mapStateToProps, {fetchData})(SmurfList)

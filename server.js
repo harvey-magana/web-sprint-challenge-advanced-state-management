@@ -30,6 +30,7 @@ server.get('/smurfs', (req, res) => {
   console.log(res)
   res.json(smurfs);
 });
+
 let smurfId = smurfs.length;
 
 server.post('/smurfs', (req, res) => {
