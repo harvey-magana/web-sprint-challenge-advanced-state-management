@@ -17,7 +17,7 @@ const SmurfForm = (props) => {
 
 const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("I was clicked...")
+    console.log(values)
     props.addSmurf(values);
 };
 

@@ -22,6 +22,7 @@ const initialState = {
 }
 
 export const smurfReducer = (state = initialState, action) => {
+    console.log(action.payload)
     switch(action.type) {
         case FETCH_SMURF_START: 
             return {

@@ -27,8 +27,9 @@ function App(props) {
           <div>...fetching...</div>
         ) : ( 
           props.smurfAsProps && props.smurfAsProps.map(item => 
-            <div key={item.id}>{item.name}
-            </div>
+            <ul key={item.id}>
+            <li>Name: {item.name} Age: {item.age} Height: {item.height}</li>
+            </ul>
           )
         )}
         <SmurfForm />
