@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { getSmurfs } from '../actions/smurfActions';
 import { connect } from 'react-redux';
 import SmurfForm from '../components/SmurfForm';
+import AddSmurf from '../components/AddSmurf';
+import EditSmurf from '../components/EditSmurf';
+import Smurfs from '../components/Smurfs';
 import "./App.css";
 
 //1
@@ -24,16 +27,13 @@ function App(props) {
         <div>Welcome to your state management version of Smurfs!</div>
         <div>Start inside of your `src/index.js` file!</div>
         <div>Have fun!</div>
-        {props.isFetching ? (
-          <div>...fetching...</div>
-        ) : ( 
-          props.smurfAsProps && props.smurfAsProps.map(item => 
-            <ul key={item.id}>
-            <li>Name: {item.name} Age: {item.age} Height: {item.height}cm</li>
-            </ul>
-          )
-        )}
-        <SmurfForm />
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Smurfs} />
+            <Route exact path="/smurf/add" component={AddSmurf} />
+            <Route exact path="/smurf/edit/:id" component={EditSmurf} />
+          </Switch>
+        </Router>
       </div>
     );
 }
