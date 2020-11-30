@@ -38,7 +38,10 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
+    smurfs: state.data,
+    smurf: state.data,
     smurfAsProps: state.data,
     isFetching: state.isFetching,
     error: state.error

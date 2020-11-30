@@ -7,6 +7,8 @@ import axios from 'axios';
 export const ADD_NEW_SMURF = 'ADD_NEW_SMURF';
 export const GET_SMURFS = 'GET_SMURFS';
 export const GET_SMURF = 'GET_SMURF';
+export const DELETE_SMURF = 'DELETE_SMURF';
+export const UPDATE_SMURF = 'UPDATE_SMURF';
 export const GET_SMURF_SUCCESS = 'GET_SMURF_SUCCESS';
 export const GET_SMURF_FAIL = 'GET_SMURF_FAIL';
 

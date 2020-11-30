@@ -5,20 +5,17 @@
 
 import { 
     ADD_NEW_SMURF,
-    GET_SMURFS, 
-    GET_SMURF_SUCCESS, 
-    GET_SMURF_FAIL 
+    GET_SMURFS,
+    GET_SMURF,
+    DELETE_SMURF,
+    UPDATE_SMURF,
+    GET_SMURF_SUCCESS,
+    GET_SMURF_FAIL,
 } from '../actions/smurfActions';
 
 const initialState = {
-    smurfs: [
-        {
-            name: 'Brainy',
-            age: 200,
-            height: '5cm',
-            id: Date.now()
-        }
-    ]
+    smurfs: [], 
+    smurf: {}
 }
 
 export const smurfReducer = (state = initialState, action) => {
@@ -37,10 +34,25 @@ export const smurfReducer = (state = initialState, action) => {
                 data: action.payload,
                 error: ''
             }
+        case GET_SMURF: 
+            return {
+                ...state, 
+                data: action.payload,
+            }
+        case DELETE_SMURF: 
+            return {
+                ...state, 
+                data: state.smurfs.filter(smurf => smurf.id !== action.payload)
+            }
         case ADD_NEW_SMURF: 
             return {
                 ...state, 
                 smurfs: [...state.smurfs, action.payload]
+            }
+        case UPDATE_SMURF: 
+            return {
+                ...state, 
+                smurfs: state.smurfs.map(smurf => smurf.id === action.payload.id ? (smurf = action.payload) : smurf)
             }
         case GET_SMURF_FAIL:
             return {
