@@ -1,4 +1,5 @@
 import React, { Component, useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { getSmurfs } from '../actions/smurfActions';
 import { connect } from 'react-redux';
 import SmurfForm from '../components/SmurfForm';
