@@ -5,9 +5,9 @@
 
 import { 
     ADD_NEW_SMURF,
-    FETCH_SMURF_START, 
-    FETCH_SMURF_SUCCESS, 
-    FETCH_SMURF_FAIL 
+    GET_SMURFS, 
+    GET_SMURF_SUCCESS, 
+    GET_SMURF_FAIL 
 } from '../actions/smurfActions';
 
 const initialState = {
@@ -24,13 +24,13 @@ const initialState = {
 export const smurfReducer = (state = initialState, action) => {
     console.log(action.payload)
     switch(action.type) {
-        case FETCH_SMURF_START: 
+        case GET_SMURFS: 
             return {
                 ...state,
                 isFetching: true,
                 error: ''
             }
-        case FETCH_SMURF_SUCCESS: 
+        case GET_SMURF_SUCCESS: 
             return {
                 ...state, 
                 isFetching: false,
@@ -42,7 +42,7 @@ export const smurfReducer = (state = initialState, action) => {
                 ...state, 
                 smurfs: [...state.smurfs, action.payload]
             }
-        case FETCH_SMURF_FAIL:
+        case GET_SMURF_FAIL:
             return {
                 ...state,
                 error: action.payload

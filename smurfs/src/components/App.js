@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from "react";
-import { fetchData } from '../actions/smurfActions';
+import { getSmurfs } from '../actions/smurfActions';
 import { connect } from 'react-redux';
 import SmurfForm from '../components/SmurfForm';
 import "./App.css";
@@ -14,7 +14,7 @@ import "./App.css";
 
 function App(props) {
   useEffect(() => {
-    props.fetchData();
+    props.getSmurfs();
   }, [])
 
     return (
@@ -28,7 +28,7 @@ function App(props) {
         ) : ( 
           props.smurfAsProps && props.smurfAsProps.map(item => 
             <ul key={item.id}>
-            <li>Name: {item.name} Age: {item.age} Height: {item.height}</li>
+            <li>Name: {item.name} Age: {item.age} Height: {item.height}cm</li>
             </ul>
           )
         )}
@@ -45,4 +45,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect (mapStateToProps, {fetchData})(App)
+export default connect (mapStateToProps, {getSmurfs})(App)
