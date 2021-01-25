@@ -12,6 +12,7 @@ export const UPDATE_SMURF = 'UPDATE_SMURF';
 export const GET_SMURF_SUCCESS = 'GET_SMURF_SUCCESS';
 export const GET_SMURF_FAIL = 'GET_SMURF_FAIL';
 
+///you can remove this...
 const headers = {
     'Content-Type': 'application/json'
   }
@@ -24,13 +25,14 @@ export const getSmurfs = () => dispatch => {
         .get('http://localhost:3333/smurfs')
         .then(res => {
             const data = res.data
-            console.log(res)
           dispatch({ type: GET_SMURF_SUCCESS, payload: data })
         })
         .catch( err => dispatch({ type: GET_SMURF_FAIL, payload: err }))
     }, 3000);
   };
 
+  //you might not need this one because the id is automatically generated from the server
+  // this one may be skrapped
   export const getSmurf = (id) => dispatch => {
     axios
     .get(`http://localhost:3333/smurfs/${id}`)
@@ -58,7 +60,7 @@ export const addSmurf = (newSmurf) => (dispatch) => {
 
 export const updateSmurf = (newSmurf) => (dispatch) => {
     let smurfData = newSmurf;
-    console.log(smurfData);
+    //console.log(smurfData);
     axios
     .put(`http://localhost:3333/smurfs/${smurfData.id}`, smurfData, {
         headers: headers
@@ -72,12 +74,11 @@ export const updateSmurf = (newSmurf) => (dispatch) => {
 
 export const deleteSmurf = (id) => (dispatch) => {
     axios
-    .put(`http://localhost:3333/smurfs/${id}`, smurfData, {
+    .delete(`http://localhost:3333/smurfs/${id}`, {
         headers: headers
     })
     .then(res => {
-        const data = id
-      dispatch({ type: DELETE_SMURF, payload: data })
+      dispatch({ type: DELETE_SMURF, payload: id})
     })
     .catch( err => dispatch({ type: GET_SMURF_FAIL, payload: err })) 
 }

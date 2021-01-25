@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+//import React, { useEffect } from "react";
+//THIS COMPONENT IS NOT BEING USED
 import { fetchData } from '../actions/smurfActions';
 import { connect } from 'react-redux';
 import "./App.css";
@@ -17,9 +18,9 @@ function SmurfList(props) {
   }, [])
 
     return (
-      <div className="App">
+      <div className="SmurfList">
         <h1>SMURFS! W/Redux</h1>
-        <div>Welcome to your state management version of Smurfs!</div>
+        <div>Welcome to your state mushrooms version of Smurfs!</div>
         <div>Start inside of your `src/index.js` file!</div>
         <div>Have fun!</div>
         {props.isFetching ? (

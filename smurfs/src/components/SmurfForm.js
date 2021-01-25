@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
-import { addSmurf } from '../actions/smurfActions';
+import { addSmurf, updateSmurf } from '../actions/smurfActions';
+import "./App.css";
 
 
 // This form should be handled by a "useForm" custom hook
@@ -8,22 +9,35 @@ import { addSmurf } from '../actions/smurfActions';
 // and replace the necessary stateful logic from CheckoutForm with the hook
 
 const SmurfForm = (props) => {
+  console.log(props)
+  const [values, setValues] = useState({
+    name: '', 
+    age: '', 
+    height: ''
+  });
 
-  const [values, setValues] = useState([]);
+  useEffect(() => {
+    props.editSmurf && setValues(props.editSmurf)
+  },[props.editSmurf])
 
     const handleChanges = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
 
-const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(values)
-    props.addSmurf(values);
-};
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log(values)
+      props.addSmurf(values);
+      setValues({
+        name: '', 
+        age: '', 
+        height: ''
+      })
+  };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className="SmurfForm" onSubmit={handleSubmit}>
         <h2>Smurf Form</h2>
         <label>
           Name:
@@ -51,19 +65,23 @@ const handleSubmit = (e) => {
         </label>
         <button type="submit">Submit</button>
       </form>
+      {props.editSmurf && <button onClick={() => {props.updateSmurf(values)}}>Edit</button>}
 
     </>
   );
 };
 
+/*
 const mapStateToProps = (state) => {
+  console.log(state)
     return {
       smurfs: state.data,
     }
   }
+*/
 
 export default connect(
     () => {
         return {}
     },
-{addSmurf})(SmurfForm);
+{addSmurf, updateSmurf})(SmurfForm);

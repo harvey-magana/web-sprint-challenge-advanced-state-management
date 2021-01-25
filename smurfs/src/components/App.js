@@ -1,11 +1,7 @@
-import React, { Component, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { getSmurfs } from '../actions/smurfActions';
+import React, { useState, useEffect } from "react";
+import { getSmurfs, deleteSmurf } from '../actions/smurfActions';
 import { connect } from 'react-redux';
 import SmurfForm from '../components/SmurfForm';
-import AddSmurf from '../components/AddSmurf';
-import EditSmurf from '../components/EditSmurf';
-import Smurfs from '../components/Smurfs';
 import "./App.css";
 
 //1
@@ -17,36 +13,45 @@ import "./App.css";
 //add method to connect in HOC
 
 function App(props) {
+  console.log(props.smurfAsProps);
+  const [ editSmurf, setEditSmurf ] = useState()
   useEffect(() => {
     props.getSmurfs();
   }, [])
 
     return (
-      <div className="App">
+      <div className="App SmurfList">
         <h1>SMURFS! W/Redux</h1>
-        <div>Welcome to your state management version of Smurfs!</div>
+        <div>Welcome to your state eagles version of Smurfs!</div>
         <div>Start inside of your `src/index.js` file!</div>
         <div>Have fun!</div>
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Smurfs} />
-            <Route exact path="/smurf/add" component={AddSmurf} />
-            <Route exact path="/smurf/edit/:id" component={EditSmurf} />
-          </Switch>
-        </Router>
+        {props.isFetching ? (
+          <div>...fetching...</div>
+        ) : ( 
+          props.smurfAsProps && props.smurfAsProps.map(item => 
+              <div key={item.id} className="row">
+                <div className="column">
+                  <div onClick={() => {setEditSmurf(item)}} className="card">
+                    <h3>Name: {item.name}</h3>
+                    <p>Age: {item.age}</p>
+                    <p>Height: {item.height}cm</p>
+                    <span className="deleteIcon" onClick={() => {props.deleteSmurf(item.id)}}>x</span>
+                  </div>
+                </div>
+              </div>
+          )
+        )}
+        <SmurfForm editSmurf={editSmurf} />
       </div>
     );
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
-    smurfs: state.data,
-    smurf: state.data,
     smurfAsProps: state.data,
     isFetching: state.isFetching,
     error: state.error
   }
 }
 
-export default connect (mapStateToProps, {getSmurfs})(App)
+export default connect (mapStateToProps, {getSmurfs, deleteSmurf})(App)

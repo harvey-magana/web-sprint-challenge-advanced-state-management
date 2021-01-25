@@ -13,13 +13,16 @@ import {
     GET_SMURF_FAIL,
 } from '../actions/smurfActions';
 
+// you won't need the smurf object...
 const initialState = {
-    smurfs: [], 
-    smurf: {}
+    data: [],
+    isFetching: false,
+    error: ''
 }
 
+//you need to keep your naming convention uniform and replace smurf with  data since you are already using that name for your state
 export const smurfReducer = (state = initialState, action) => {
-    console.log(action.payload)
+    //console.log(action.payload)
     switch(action.type) {
         case GET_SMURFS: 
             return {
@@ -42,17 +45,17 @@ export const smurfReducer = (state = initialState, action) => {
         case DELETE_SMURF: 
             return {
                 ...state, 
-                data: state.smurfs.filter(smurf => smurf.id !== action.payload)
+                data: state.data.filter(smurf => smurf.id !== action.payload)
             }
         case ADD_NEW_SMURF: 
             return {
                 ...state, 
-                smurfs: [...state.smurfs, action.payload]
+                data: action.payload
             }
         case UPDATE_SMURF: 
             return {
                 ...state, 
-                smurfs: state.smurfs.map(smurf => smurf.id === action.payload.id ? (smurf = action.payload) : smurf)
+                data: action.payload
             }
         case GET_SMURF_FAIL:
             return {

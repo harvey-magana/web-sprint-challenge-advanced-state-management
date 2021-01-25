@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
 import { deleteSmurf } from '../actions/smurfActions';
 
-class Contact extends Component {
+class Smurf extends Component {
   state = {
-    showContactInfo: true
+    showSmurfInfo: true
   };
 
   onDeleteClick = id => {
-     this.props.deleteContact(id);
+     this.props.deleteSmurf(id);
   };
 
   render() {
-    const { id, name, email, phone } = this.props.contact; 
-    const { showContactInfo } = this.state;
+    const { id, name, age, height } = this.props.smurf;
+    const { showSmurfInfo } = this.state;
 
     return (
       <div className="card card-body mb-3">
@@ -26,7 +25,7 @@ class Contact extends Component {
           <i
             onClick={() =>
               this.setState({
-                showContactInfo: !this.state.showContactInfo
+                showSmurfInfo: !this.state.showSmurfInfo
               })
             }
             className="fas fa-sort-down"
@@ -49,10 +48,11 @@ class Contact extends Component {
             />
           </Link>
         </h4>
-        {showContactInfo ? (
+        {showSmurfInfo ? (
           <ul className="list-group"> 
-            <li className="list-group-item">Email: {email}</li>
-            <li className="list-group-item">Phone: {phone}</li>
+            <li className="list-group-item">Name: {NavigationPreloadManager}</li>
+            <li className="list-group-item">Age: {age}</li>
+            <li className="list-group-item">Height: {height}</li>
           </ul>
         ) : null}
       </div>
@@ -60,8 +60,4 @@ class Contact extends Component {
   }
 }
 
-Contact.propTypes = {
-  contact: PropTypes.object.isRequired
-};
-
-export default connect(null , { deleteContact })(Contact);
+export default connect(null , { deleteSmurf })(Smurf);
